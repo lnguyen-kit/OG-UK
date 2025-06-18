@@ -41,11 +41,13 @@ if os.access(OUTPUT_DIR, os.F_OK) is False:
 Define functions
 ------------------------------------------------------------------------
 """
+COUNTRY_ID ="276"
+START_YEAR = 2021
 
 
 def get_un_fert_data(
-    country_id: str = "826",o
-    start_year: int = 2021,
+    country_id: str = COUNTRY_ID,
+    start_year: int = START_YEAR,
     end_year: int = None,
     download: bool = True,
 ) -> pd.DataFrame:
@@ -126,8 +128,8 @@ def get_un_fert_data(
 
 
 def get_un_mort_data(
-    country_id: str = "826",
-    start_year: int = 2021,
+    country_id: str = COUNTRY_ID,
+    start_year: int = START_YEAR,
     end_year: int = None,
     download: bool = True,
 ) -> pd.DataFrame:

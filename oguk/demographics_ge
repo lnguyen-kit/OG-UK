@@ -41,12 +41,13 @@ if os.access(OUTPUT_DIR, os.F_OK) is False:
 Define functions
 ------------------------------------------------------------------------
 """
-COUNTRY_ID ="276"
+UN_COUNTRY_ID ="276"
 START_YEAR = 2021
+END_YEAR = 2021
 
 
 def get_un_fert_data(
-    country_id: str = COUNTRY_ID,
+    country_id: str = UN_COUNTRY_ID,
     start_year: int = START_YEAR,
     end_year: int = None,
     download: bool = True,
@@ -56,14 +57,13 @@ def get_un_fert_data(
         start_year = 2021
     if end_year is None:
         end_year = start_year
-    # UN variable code for Population by 1-year age groups and sex
-    pop_code = "47"
-    # UN variable code for Fertility rates by age of mother (1-year)
-    fert_code = "68"
+    
+    pop_code = "47" # UN variable code for Population by 1-year age groups and sex
+    fert_code = "68" # UN variable code for Fertility rates by age of mother (1-year)
 
    
-    pop_target = os.path.join(DATA_DIR, "un_uk_pop.csv") # heir bitte noch anpassen
-    fert_target = os.path.join(DATA_DIR, "un_uk_fert.csv")
+    pop_target = os.path.join(DATA_DIR, "un_ge_pop.csv") 
+    fert_target = os.path.join(DATA_DIR, "un_ge_fert.csv")
 
     # Convert .csv file to Pandas DataFrame
     pop_df = pd.read_csv(
@@ -73,8 +73,7 @@ def get_un_fert_data(
         usecols=["TimeLabel", "SexId", "Sex", "AgeStart", "Value"],
         float_precision="round_trip",
     )
-    fert_rates_df = pd.read_csv(
-        fert_target,
+    fert_rates_df = pd.read_csv(fert_target,
         sep="|",
         header=1,
         usecols=["TimeLabel", "AgeStart", "Value"],
@@ -128,7 +127,7 @@ def get_un_fert_data(
 
 
 def get_un_mort_data(
-    country_id: str = COUNTRY_ID,
+    country_id: str = UN_COUNTRY_ID,
     start_year: int = START_YEAR,
     end_year: int = None,
     download: bool = True,
